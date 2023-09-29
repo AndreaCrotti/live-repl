@@ -1,0 +1,19 @@
+{:deps  {integrant/repl                {:mvn/version "0.3.3"}
+         integrant/integrant           {:mvn/version "0.8.1"}
+         djblue/portal                 {:mvn/version "0.48.0"}
+         io.pedestal/pedestal.service  {:mvn/version "0.5.7"}
+         io.pedestal/pedestal.route    {:mvn/version "0.5.7"}
+         io.pedestal/pedestal.jetty    {:mvn/version "0.5.7"}
+         org.slf4j/slf4j-simple        {:mvn/version "1.7.28"}
+         nrepl/nrepl                   {:mvn/version "1.1.0"}
+         vlaaad/remote-repl            {:mvn/version "1.2.12"}
+         refactor-nrepl/refactor-nrepl {:mvn/version "3.9.1"}
+         org.clojure/tools.namespace   {:mvn/version "1.4.4"}
+         aero/aero                     {:mvn/version "1.1.6"}}
+ ;;TODO: all the debugging/repl libraries could also be added to a
+ ;;separate sidecar JVM instead of being bundled into the main thing
+ :resource-paths ["resources"]
+ :paths ["src" "resources"]
+ :aliases
+ {:build {:deps       {io.github.clojure/tools.build {:git/sha "534e07e1d504ab419e3b65c21aac8169fe7170ae"}}
+          :ns-default build}}}

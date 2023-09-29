@@ -1,0 +1,14 @@
+---
+version: '3'
+
+services:
+  live-repl:
+    build: .
+    image: live-repl
+
+    ports:
+      - 5553:5553
+      - 5554:5554
+      - 5555:5555
+      - 5556:5556
+      - 3007:3007
