@@ -1,7 +1,10 @@
-# Live repling
+# Live REPLing for fun and profit
 
- - how to start/connect to different types of repls
- - build a jar and connect to it with a live configuration
- - how to reload if you have protocols/records
- - reload code from prod/local
- - possible examples of inlined defs and other possible things
+Showcase project for different kind of live REPLs, how to connect to them and various related tips&tricks.
+
+You can run the project either the [run.sh](./run.sh) script in three ways:
+- `./run.sh docker` (builds a docker image and runs it)
+- `./run.sh jar` (runs from the jar file)
+- `./run.sh` (runs directly with `clj`)
+
+This project can then be used to showcase the different REPLs and how reloading works.
