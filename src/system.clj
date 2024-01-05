@@ -5,6 +5,8 @@
    [config :refer [config]]
    [integrant.core :as ig]
    [io.pedestal.http :as http]
+   #_:clj-kondo/ignore
+   [middleware :as m]
    [nrepl.server :as nrepl]))
 
 
@@ -18,6 +20,18 @@
 (defmethod ig/halt-key! ::nrepl-server [_ repl]
   (nrepl/stop-server repl))
 
+(defmethod ig/init-key ::nrepl-with-middleware [_ {:keys [port]}]
+  (assert (some? port), "Missing port")
+  (println "Starting nrepl server on port " port)
+  (let [custom-handler
+        (apply nrepl/default-handler ['middleware/log-action])]
+    (nrepl/start-server :port port
+                        :bind "0.0.0.0"
+                        :handler custom-handler)))
+
+(defmethod ig/halt-key! ::nrepl-with-middleware [_ repl]
+  (nrepl/stop-server repl))
+
 (defmethod ig/init-key ::nrepl-tls-server [_ {:keys [port]}]
   (assert (some? port), "Missing port")
   (println "Starting nrepl-tls server on port " port)
@@ -29,7 +43,6 @@
 
 
 (defmethod ig/halt-key! ::nrepl-tls-server [_ repl]
-  (def r repl)
   (nrepl/stop-server repl))
 
 
@@ -74,8 +87,8 @@
   [_request]
   {:status  200
    :body    (json/encode (config))
-   :headers {"Content-Type" "application/json"}})
-
+   :headers {"Content-Type" "application/json"}}
+)
 (def routes
   #{["/health" :get `health-check :route-name :health]
     ["/echo" :get `echo :route-name :echo]

@@ -8,11 +8,12 @@
    [system :as s]))
 
 (def config
-  {::s/web-server       {:port 3007}
-   ::s/nrepl-server     {:port 5553}
-   ::s/nrepl-tls-server {:port 5554}
-   ::s/prepl-server     {:port 5555}
-   ::s/socket-server    {:port 5556}})
+  {::s/web-server            {:port 3007}
+   ::s/nrepl-with-middleware {:port 5552}
+   ::s/nrepl-server          {:port 5553}
+   ::s/nrepl-tls-server      {:port 5554}
+   ::s/prepl-server          {:port 5555}
+   ::s/socket-server         {:port 5556}})
 
 
 (defn start-all []
