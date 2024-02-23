@@ -23,11 +23,9 @@
 (defmethod ig/init-key ::nrepl-with-middleware [_ {:keys [port]}]
   (assert (some? port), "Missing port")
   (println "Starting nrepl server on port " port)
-  (let [custom-handler
-        (apply nrepl/default-handler ['middleware/log-action])]
-    (nrepl/start-server :port port
-                        :bind "0.0.0.0"
-                        :handler custom-handler)))
+  (nrepl/start-server :port port
+                      :bind "0.0.0.0"
+                      :handler (nrepl/default-handler 'middleware/log-action)))
 
 (defmethod ig/halt-key! ::nrepl-with-middleware [_ repl]
   (nrepl/stop-server repl))
